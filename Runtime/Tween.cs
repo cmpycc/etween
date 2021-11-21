@@ -23,7 +23,6 @@ namespace cmpy.Tween
         public EaseType easeType = EaseType.Out;
         public Ease ease = new ExpoEase();
 
-        //public bool finished { get; private set; } = false;
         public bool Finished => currentTime >= duration + delay;
         private float currentTime = 0.0f;
 
@@ -44,14 +43,6 @@ namespace cmpy.Tween
             currentTime += delta;
             float time = Mathf.Min(duration, Mathf.Max(currentTime - delay, 0.0f)) / duration;
 
-            /*setter(Interpolate(easeType switch
-            {
-                EaseType.In => ease.ComputeIn(time),
-                EaseType.Out => ease.ComputeOut(time),
-                EaseType.InOut => ease.ComputeInOut(time),
-                _ => throw new NotImplementedException(),
-            }));*/
-
             if (!initialValueSet)
             {
                 initialValue = getter();
@@ -66,7 +57,6 @@ namespace cmpy.Tween
 
             if (Finished)
             {
-                Debug.Log("finished");
                 setter(shake ? initialValue : endValue);
             }
         }
