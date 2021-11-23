@@ -7,7 +7,7 @@ namespace cmpy.Tween
     {
         public static Vector3Tween TPosition(this Transform transform, Vector3 endValue, float duration)
         {
-            Vector3Tween tween = new(
+            Vector3Tween tween = new Vector3Tween(
                 transform,
                 () => transform.position,
                 (value) => transform.position = value, endValue, duration);
@@ -17,7 +17,7 @@ namespace cmpy.Tween
 
         public static Vector3Tween TLocalPosition(this Transform transform, Vector3 endValue, float duration)
         {
-            Vector3Tween tween = new(
+            Vector3Tween tween = new Vector3Tween(
                 transform,
                 () => transform.localPosition,
                 (value) => transform.localPosition = value, endValue, duration);
@@ -27,7 +27,7 @@ namespace cmpy.Tween
 
         public static QuaternionTween TRotation(this Transform transform, Quaternion endValue, float duration)
         {
-            QuaternionTween tween = new(
+            QuaternionTween tween = new QuaternionTween(
                 transform,
                 () => transform.rotation,
                 (value) => transform.rotation = value, endValue, duration);
@@ -37,7 +37,7 @@ namespace cmpy.Tween
 
         public static QuaternionTween TLocalRotation(this Transform transform, Quaternion endValue, float duration)
         {
-            QuaternionTween tween = new(
+            QuaternionTween tween = new QuaternionTween(
                 transform,
                 () => transform.localRotation,
                 (value) => transform.localRotation = value, endValue, duration);
@@ -47,7 +47,7 @@ namespace cmpy.Tween
 
         public static Vector3Tween TLocalScale(this Transform transform, Vector3 endValue, float duration)
         {
-            Vector3Tween tween = new(
+            Vector3Tween tween = new Vector3Tween(
                 transform,
                 () => transform.localScale,
                 (value) => transform.localScale = value, endValue, duration);

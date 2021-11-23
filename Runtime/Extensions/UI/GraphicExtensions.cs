@@ -7,7 +7,7 @@ namespace cmpy.Tween {
     {
         public static ColorTween TColor(this Graphic image, Color endValue, float duration)
         {
-            ColorTween tween = new(
+            ColorTween tween = new ColorTween(
                 image,
                 () => image.color,
                 (value) => image.color = value,
@@ -18,7 +18,7 @@ namespace cmpy.Tween {
 
         public static FloatTween TAlpha(this Graphic graphic, float endValue, float duration)
         {
-            FloatTween tween = new(
+            FloatTween tween = new FloatTween(
                 graphic,
                 () => graphic.color.a,
                 (value) =>

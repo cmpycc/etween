@@ -9,7 +9,7 @@ namespace cmpy.Tween
     {
         public static FloatTween TFontSize(this TMP_Text text, float endValue, float duration)
         {
-            FloatTween tween = new(
+            FloatTween tween = new FloatTween(
                 text,
                 () => text.fontSize,
                 (value) => text.fontSize = value, endValue, duration);
@@ -19,7 +19,7 @@ namespace cmpy.Tween
 
         public static ColorTween TColor(this TMP_Text text, Color endValue, float duration)
         {
-            ColorTween tween = new(
+            ColorTween tween = new ColorTween(
                 text,
                 () => text.color,
                 (value) => text.color = value, endValue, duration);
@@ -29,7 +29,7 @@ namespace cmpy.Tween
 
         public static VertexGradientTween TGradient(this TMP_Text text, VertexGradient endValue, float duration)
         {
-            VertexGradientTween tween = new(
+            VertexGradientTween tween = new VertexGradientTween(
                 text,
                 () => text.colorGradient,
                 (value) => text.colorGradient = value, endValue, duration);

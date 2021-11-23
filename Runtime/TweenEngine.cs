@@ -6,7 +6,7 @@ namespace cmpy.Tween
 {
     public class TweenEngine : MonoBehaviour
     {
-        private List<ITween> activeTweens = new();
+        private List<ITween> activeTweens = new List<ITween>();
 
         public static TweenEngine Instance
         {
