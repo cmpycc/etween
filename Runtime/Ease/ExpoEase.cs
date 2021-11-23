@@ -1,5 +1,9 @@
 ﻿using System;
 
+#if NET_STANDARD_2_0
+using MathF = UnityEngine.Mathf;
+#endif
+
 namespace cmpy.Tween
 {
     public class ExpoEase : Ease
