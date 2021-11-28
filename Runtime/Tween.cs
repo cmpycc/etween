@@ -16,7 +16,6 @@ namespace cmpy.Tween
         public float duration;
         public float delay;
         public bool shake = false;
-        public bool inSequence = false;
 
         private bool initialValueSet = false;
 
