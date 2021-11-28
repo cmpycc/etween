@@ -7,7 +7,7 @@ namespace cmpy.Tween
 {
     public abstract class Tween<T> : ITween
     {
-        public object owner;
+        public readonly object owner;
 
         public readonly Func<T> getter;
         public readonly Action<T> setter;
