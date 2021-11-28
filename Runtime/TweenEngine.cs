@@ -4,10 +4,20 @@ using UnityEngine;
 
 namespace cmpy.Tween
 {
+    /// <summary>
+    /// Singleton responsible for processing all of the tweens.
+    /// </summary>
+    /// <remarks>
+    /// TweenEngine should initialize itself automatically.
+    /// There should not be more than one instance of TweenEngine.
+    /// </remarks>
     public class TweenEngine : MonoBehaviour
     {
         private List<ITween> activeTweens = new List<ITween>();
 
+        /// <summary>
+        /// Returns the current instance of TweenEngine.
+        /// </summary>
         public static TweenEngine Instance
         {
             get

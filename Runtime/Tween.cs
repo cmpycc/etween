@@ -5,21 +5,51 @@ using Random = UnityEngine.Random;
 
 namespace cmpy.Tween
 {
+    /// <summary>
+    /// The main Tween type. 
+    /// </summary>
+    /// <typeparam name="T">The type being tweened.</typeparam>
     public abstract class Tween<T> : ITween
     {
+        /// <summary>
+        /// The object that owns the property being tweened.
+        /// </summary>
         public readonly object owner;
 
+        /// <summary>
+        /// Callback that returns the current value of the property.
+        /// </summary>
         public readonly Func<T> getter;
+        /// <summary>
+        /// Callback that update the current value of the property.
+        /// </summary>
         public readonly Action<T> setter;
         public T initialValue;
         public T endValue;
+        /// <summary>
+        /// How long the tween will take to complete.
+        /// </summary>
         public float duration;
+        /// <summary>
+        /// How long until the tween begins.
+        /// </summary>
         public float delay;
+        /// <summary>
+        /// If true, the tween will shake, using <see cref="endValue"/> as a "radius."
+        /// The tween will end on it's <see cref="initialValue"/>.
+        /// If false, the tween will act normally.
+        /// </summary>
         public bool shake = false;
 
         private bool initialValueSet = false;
 
+        /// <summary>
+        /// The direction of easing.
+        /// </summary>
         public EaseType easeType = EaseType.Out;
+        /// <summary>
+        /// The type of ease used.
+        /// </summary>
         public Ease ease = new ExpoEase();
 
         public bool Finished => currentTime >= duration + delay;
@@ -34,7 +64,12 @@ namespace cmpy.Tween
             this.duration = duration;
         }
 
-        // Interpolation should be unclamped in order to support tweens like elastic.
+        /// <summary>
+        /// Interpolates the tweened type.
+        /// </summary>
+        /// <param name="time">The time of the tween, as a percentage (0.0-1.0).</param>
+        /// <returns>Should return an interpolation of the type.</returns>
+        /// <remarks>Interpolation should be unclamped in order to support eases like elastic.</remarks>
         protected abstract T Interpolate(float time);
 
         public void Update(float delta)
@@ -65,6 +100,11 @@ namespace cmpy.Tween
             yield return new WaitUntil(() => Finished);
         }
 
+        /// <summary>
+        /// Overrides <see cref="initialValue"/>.
+        /// </summary>
+        /// <param name="initialValue"></param>
+        /// <returns></returns>
         public Tween<T> From(T initialValue)
         {
             this.initialValue = initialValue;
@@ -72,24 +112,45 @@ namespace cmpy.Tween
             return this;
         }
 
+        /// <summary>
+        /// Sets <see cref="delay"/>.
+        /// </summary>
+        /// <param name="delay"></param>
+        /// <returns></returns>
         public Tween<T> Delay(float delay)
         {
             this.delay = delay;
             return this;
         }
 
+        /// <summary>
+        /// Sets <see cref="ease"/>.
+        /// </summary>
+        /// <param name="ease"></param>
+        /// <returns></returns>
         public Tween<T> Ease(Ease ease)
         {
             this.ease = ease;
             return this;
         }
 
+        /// <summary>
+        /// Sets <see cref="easeType"/>.
+        /// </summary>
+        /// <param name="easeType"></param>
+        /// <returns></returns>
         public Tween<T> Ease(EaseType easeType)
         {
             this.easeType = easeType;
             return this;
         }
 
+        /// <summary>
+        /// Sets <see cref="ease"/> and <see cref="easeType"/>.
+        /// </summary>
+        /// <param name="ease"></param>
+        /// <param name="easeType"></param>
+        /// <returns></returns>
         public Tween<T> Ease(Ease ease, EaseType easeType)
         {
             this.ease = ease;
@@ -97,6 +158,11 @@ namespace cmpy.Tween
             return this;
         }
 
+        /// <summary>
+        /// Sets <see cref="shake"/>.
+        /// </summary>
+        /// <param name="shake"></param>
+        /// <returns></returns>
         public Tween<T> Shake(bool shake = true)
         {
             this.shake = shake;

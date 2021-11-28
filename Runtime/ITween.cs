@@ -3,6 +3,10 @@ using System.Collections;
 
 namespace cmpy.Tween
 {
+    /// <summary>
+    /// The bare minimum Tween type. Only TweenEngine should reference this.
+    /// </summary>
+    /// <seealso cref="Tween{T}"/>
     public interface ITween
     {
         public bool Finished { get; }
