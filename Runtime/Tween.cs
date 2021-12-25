@@ -42,6 +42,7 @@ namespace cmpy.Tween
         public bool shake = false;
 
         private bool initialValueSet = false;
+        private bool finishEarly = false;
 
         /// <summary>
         /// The direction of easing.
@@ -52,7 +53,7 @@ namespace cmpy.Tween
         /// </summary>
         public Ease ease = new ExpoEase();
 
-        public bool Finished => currentTime >= duration + delay;
+        public bool Finished => currentTime >= duration + delay || finishEarly;
         private float currentTime = 0.0f;
 
         protected Tween(object owner, Func<T> getter, Action<T> setter, T endValue, float duration)
@@ -167,6 +168,14 @@ namespace cmpy.Tween
         {
             this.shake = shake;
             return this;
+        }
+
+        /// <summary>
+        /// Finish the tween early.
+        /// </summary>
+        public void Finish()
+        {
+            finishEarly = true;
         }
     }
 }
