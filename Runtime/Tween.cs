@@ -85,6 +85,7 @@ namespace cmpy.Tween
             }
 
             float easedTime = ease.Compute(easeType, time);
+            // TODO: Shake needs some work lmao
             setter(Interpolate(
                 shake ?
                 Random.Range(-1.0f, 1.0f) * (1.0f - easedTime)
