@@ -42,6 +42,11 @@ namespace cmpy.Tween
         /// If false, the tween will act normally.
         /// </summary>
         public bool shake = false;
+        /// <summary>
+        /// If true, the tween will use unscaled deltaTime.
+        /// </summary>
+        public bool useUnscaledUpdate = false;
+        public bool UseUnscaledUpdate => useUnscaledUpdate;
 
         private bool initialValueSet = false;
         private bool finishEarly = false;
@@ -195,6 +200,17 @@ namespace cmpy.Tween
         public Tween<T> Shake(bool shake = true)
         {
             this.shake = shake;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets <see cref="useUnscaledUpdate"/>.
+        /// </summary>
+        /// <param name="useUnscaledUpdate"></param>
+        /// <returns></returns>
+        public Tween<T> UseUnscaledUpdate(bool useUnscaledUpdate = true)
+        {
+            this.useUnscaledUpdate = useUnscaledUpdate;
             return this;
         }
 

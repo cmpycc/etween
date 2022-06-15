@@ -10,6 +10,7 @@ namespace cmpy.Tween
     public interface ITween
     {
         public bool Finished { get; }
+        public bool UseUnscaledUpdate { get; }
         public void Update(float delta);
         public IEnumerator Await();
     }
