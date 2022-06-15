@@ -46,7 +46,7 @@ namespace cmpy.Tween
         /// If true, the tween will use unscaled deltaTime.
         /// </summary>
         public bool useUnscaledUpdate = false;
-        public bool UseUnscaledUpdate => useUnscaledUpdate;
+        internal bool ShouldUseUnscaledUpdate => useUnscaledUpdate;
 
         private bool initialValueSet = false;
         private bool finishEarly = false;

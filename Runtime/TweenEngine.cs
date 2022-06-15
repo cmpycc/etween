@@ -37,7 +37,7 @@ namespace cmpy.Tween
         {
             foreach (ITween tween in activeTweens)
             {
-                tween.Update(tween.UseUnscaledUpdate ? Time.unscaledDeltaTime : Time.deltaTime);
+                tween.Update(tween.ShouldUseUnscaledUpdate ? Time.unscaledDeltaTime : Time.deltaTime);
             }
 
             activeTweens.RemoveAll(tween => tween.Finished);
