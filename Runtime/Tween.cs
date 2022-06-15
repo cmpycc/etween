@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
+
 using Random = UnityEngine.Random;
 
 namespace cmpy.Tween
@@ -56,6 +58,17 @@ namespace cmpy.Tween
         public bool Finished => currentTime >= duration + delay || finishEarly;
         private float currentTime = 0.0f;
 
+        /// <summary>
+        /// Fired when the tween finishes uninterupted.
+        /// </summary>
+        public UnityEvent onComplete = new UnityEvent();
+        /// <summary>
+        /// Fired when the tween finishes.
+        /// </summary>
+        public UnityEvent onFinish = new UnityEvent();
+
+        private bool onCompleteInvoked = false, onFinishInvoked = false;
+
         protected Tween(object owner, Func<T> getter, Action<T> setter, T endValue, float duration)
         {
             this.owner = owner;
@@ -94,6 +107,20 @@ namespace cmpy.Tween
             if (Finished)
             {
                 setter(shake ? initialValue : endValue);
+
+                // Fire onFinished
+                if (!onFinishInvoked)
+                {
+                    onFinish.Invoke();
+                    onFinishInvoked = true;
+                }
+
+                // Fire onComplete
+                if (!onCompleteInvoked && !finishEarly)
+                {
+                    onComplete.Invoke();
+                    onCompleteInvoked = true;
+                }
             }
         }
 
@@ -168,6 +195,28 @@ namespace cmpy.Tween
         public Tween<T> Shake(bool shake = true)
         {
             this.shake = shake;
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a listener to <see cref="onComplete"/>.
+        /// </summary>
+        /// <param name="listener"></param>
+        /// <returns></returns>
+        public Tween<T> OnComplete(UnityAction listener)
+        {
+            onFinish.AddListener(listener);
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a listener to <see cref="onFinish"/>.
+        /// </summary>
+        /// <param name="listener"></param>
+        /// <returns></returns>
+        public Tween<T> OnFinish(UnityAction listener)
+        {
+            onFinish.AddListener(listener);
             return this;
         }
 
